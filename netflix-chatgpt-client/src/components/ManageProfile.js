@@ -16,7 +16,7 @@ const ManageProfile = () => {
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState("");
     const fileInputRef = useRef(null);
-    const managedUserURL = 'https://netflix-chatgpt-project-server.vercel.app//api/v1/netflix-user';
+    const managedUserURL = 'api/v1/netflix-user';
 
 
     const option1 = [
