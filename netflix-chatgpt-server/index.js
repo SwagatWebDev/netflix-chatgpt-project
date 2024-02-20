@@ -18,7 +18,7 @@ const { getOrderFilter } = require("./controller/order");
 const cors = require('cors');
 
 // Server Middleware
-server.use(cors());
+// server.use(cors());
 server.use(express.json());
 server.use(baseURL + productURL, productRouter.router);
 server.use(baseURL + userURL, userRouter.router);
