@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
 
 app.use(baseURL.concat(productURL), productRoute);
 
-app.use(baseURL.concat(netflixUserURL), netflixUserRoute.router);
+// app.use(baseURL.concat(netflixUserURL), netflixUserRoute.router);
 
 app.listen(PORT, () => {
     console.log('Server is listen in on PORT : ' + PORT);
