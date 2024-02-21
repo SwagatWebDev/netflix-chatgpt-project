@@ -10,10 +10,8 @@ const {getProducts} = require("./src/controller/productController");
 const baseURL = '/api/v1';
 const productURL = '/products';
 const netflixUserURL = '/netflix-user';
-const cors = require('cors');
 
 app.use(express.json());
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -36,7 +34,7 @@ app.use((err, req, res, next) => {
 
 app.use(baseURL.concat(productURL), productRoute);
 
-// app.use(baseURL.concat(netflixUserURL), netflixUserRoute.router);
+app.use(baseURL.concat(netflixUserURL), netflixUserRoute.router);
 
 app.listen(PORT, () => {
     console.log('Server is listen in on PORT : ' + PORT);
