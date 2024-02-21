@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./db');
 const PORT = process.env.PORT || 8080;
-const productRoutes = require('./src/routes/productRoutes');
-const {getProducts} = require("./src/controllers/productController");
+const productRoutes = require('./src/route/productRoutes');
+const {getProducts} = require("./src/controller/productController");
 
 app.use(express.json());
 app.use(bodyParser.json());
