@@ -27,7 +27,7 @@ console.log('DB Password', process.env.DB_PASSWORD);
 
 server.use(baseURL + '/user-with-order', getUsersWithOrders);
 
-app.get('/', (req, res) => {
+server.get('/', (req, res) => {
     res.send('Welcome Netflix ChatGPT API');
 });
 
