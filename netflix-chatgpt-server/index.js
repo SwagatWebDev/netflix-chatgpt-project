@@ -6,12 +6,18 @@ require('./db');
 const PORT = process.env.PORT || 8080;
 const productRoutes = require('./src/route/product-route');
 const netflixUserRoutes = require('./src/route/netflix-user-route');
-const cors = require('cors');
 
 app.use(express.json());
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Enable CORS for all routes
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
