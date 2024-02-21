@@ -4,10 +4,8 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./db');
 const PORT = process.env.PORT || 8080;
-const productRoute = require('./src/route/productRoute');
-const baseURL = '/api/v1';
-const productURL = '/products';
-const netflixUserURL = '/netflix-user';
+const productRoutes = require('./src/route/productRoute');
+const {getProducts} = require("./src/controller/productController");
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -24,14 +22,8 @@ app.get('/', (req, res) => {
     res.send('Welcome to Netflix ChatGPT API');
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+app.use('/products', productRoutes);
 
-app.use(baseURL + productURL, productRoute);
-
-app.listen(PORT, () => {
-    console.log('Server is listen in on PORT : ' + PORT);
+app.listen(8080, () => {
+    console.log('Server is listen in on PORT :' + PORT);
 })
