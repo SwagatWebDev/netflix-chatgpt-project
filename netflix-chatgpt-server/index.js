@@ -6,8 +6,10 @@ require('./db');
 const PORT = process.env.PORT || 8080;
 const productRoutes = require('./src/route/product-route');
 const netflixUserRoutes = require('./src/route/netflix-user-route');
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
