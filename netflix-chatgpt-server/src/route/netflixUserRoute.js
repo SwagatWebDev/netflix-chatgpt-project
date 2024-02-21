@@ -1,8 +1,8 @@
 const {createNetflixUser, getAllNetflixUsers} = require("../controller/netflix-user");
 
-const netflixUserRouter = require('express').Router();
+const netflixUserRoute = require('express').Router();
 
-netflixUserRouter.post('/', createNetflixUser);
-netflixUserRouter.get('/', getAllNetflixUsers);
+netflixUserRoute.post('/', createNetflixUser);
+netflixUserRoute.get('/', getAllNetflixUsers);
 
-exports.router = netflixUserRouter;
+module.exports = netflixUserRoute;

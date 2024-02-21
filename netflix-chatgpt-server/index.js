@@ -5,7 +5,7 @@ require('dotenv').config();
 require('./db');
 const PORT = process.env.PORT || 8080;
 const productRoute = require('./src/route/productRoute');
-const netflixUserRoute = require('./src/route/netflixUserRoute');
+const netflixUserRoute = require("./src/route/netflixUserRoute");
 const baseURL = '/api/v1';
 const productURL = '/products';
 const netflixUserURL = '/netflix-user';
@@ -31,7 +31,9 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-app.use(baseURL.concat(productURL), productRoute);
+app.use(baseURL + productURL, productRoute);
+
+app.use(baseURL + netflixUserURL, netflixUserRoute);
 
 app.listen(PORT, () => {
     console.log('Server is listen in on PORT : ' + PORT);
