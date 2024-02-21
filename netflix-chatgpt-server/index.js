@@ -6,7 +6,6 @@ require('./db');
 const PORT = process.env.PORT || 8080;
 const productRoute = require('./src/route/productRoute');
 const netflixUserRoute = require('./src/route/netflixUserRoute');
-const {getProducts} = require("./src/controller/productController");
 const baseURL = '/api/v1';
 const productURL = '/products';
 const netflixUserURL = '/netflix-user';
