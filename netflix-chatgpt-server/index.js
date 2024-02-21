@@ -1,39 +1,35 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
 const express = require('express');
-const connectDB = require('./src/db/connectdb.js');
-const fs = require('fs');
-const server = express();
-const baseURL = '/api/v1';
-const productURL = '/products';
-const userURL = '/users';
-const orderURL = '/orders';
-const netflixUserURL = '/netflix-user';
-const productRouter = require('./src/router/product');
-const userRouter = require('./src/router/user');
-const orderRouter = require('./src/router/order');
-const netflixUserRouter = require('./src/router/netflix-user');
-const { getUsersWithOrders } = require("./src/controller/user");
-const { getOrderFilter } = require("./src/controller/order");
-const cors = require('cors');
+const app = express();
+const bodyParser = require('body-parser');
+require('dotenv').config();
+require('./db');
+const PORT = process.env.PORT || 8080;
+const productRoutes = require('./src/routes/productRoutes');
+const {getProducts} = require("./src/controllers/productController");
 
-// Server Middleware
-server.use(cors());
-server.use(express.json());
-server.use(baseURL + productURL, productRouter.router);
-server.use(baseURL + userURL, userRouter.router);
-server.use(baseURL + orderURL, orderRouter.router);
-console.log('DB Password', process.env.DB_PASSWORD);
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-server.use(baseURL + '/user-with-order', getUsersWithOrders);
-
-server.get('/', (req, res) => {
-    res.send('Welcome Netflix ChatGPT API');
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });
 
-server.use(baseURL + netflixUserURL, netflixUserRouter.router);
 
-// starting server
-server.listen(process.env.PORT, () => {
-    console.log(`Express Server running on http://localhost:${process.env.PORT}`);
+app.get('/', (req, res) => {
+    res.send('Welcome to Netflix ChatGPT API');
 });
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+app.use('/products', productRoutes);
+
+app.listen(8080, () => {
+    console.log('Server is listen in on PORT :' + PORT);
+})
