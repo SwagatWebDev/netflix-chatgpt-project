@@ -5,6 +5,7 @@ require('dotenv').config();
 require('./db');
 const PORT = process.env.PORT || 8080;
 const productRoutes = require('./src/route/product-route');
+const netflixUserRoutes = require('./src/route/netflix-user-route');
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -24,6 +25,9 @@ app.get('/', (req, res) => {
 
 // /products
 app.use('/products', productRoutes);
+
+// /netflix-user
+app.use('/netflix-user', netflixUserRoutes);
 
 
 app.listen(8080, () => {

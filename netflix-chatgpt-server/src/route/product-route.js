@@ -7,4 +7,4 @@ productRouter.get('/:id', getProductById);
 productRouter.put('/:id', replaceProduct);
 productRouter.delete('/:id', deleteProduct);
 
-module.exports = productRouter
+module.exports = productRouter;
