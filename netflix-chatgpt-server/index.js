@@ -18,7 +18,7 @@ app.use((err, req, res, next) => {
 
 
 app.get('/', (req, res) => {
-    res.send('products api running new deploy');
+    res.send('Welcome to Netflix ChatGPT API');
 });
 
 // Error handling middleware
