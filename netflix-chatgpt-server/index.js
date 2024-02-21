@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./db');
 const PORT = process.env.PORT || 8080;
-const productRoutes = require('./src/routes/productRoutes');
+const productRoutes = require('./src/route/product-route');
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -21,13 +21,10 @@ app.get('/', (req, res) => {
     res.send('Welcome to Netflix ChatGPT API');
 });
 
-app.get('/ping', (req, res) => {
-    res.send('PONG')
-});
 
 // /products
 app.use('/products', productRoutes);
-// /users
+
 
 app.listen(8080, () => {
     console.log('Server is listen in on PORT :' + PORT);
