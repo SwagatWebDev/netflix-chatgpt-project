@@ -11,7 +11,7 @@ const cors = require('cors');
 app.use(cors({
     origin: 'https://netflix-chatgpt-ui.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language']
+    allowedHeaders: ['Content-Type', 'application/json']
 }));
 
 app.use(express.json());
