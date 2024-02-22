@@ -4,6 +4,8 @@ const NetflixUser = model.NetflixUser;
 
 exports.createNetflixUser = async (req, res) => {
     const netflixUser = new NetflixUser(req.body);
+    res.setHeader('Access-Control-Allow-Origin', 'https://netflix-chatgpt-ui.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
     try {
         const document = await netflixUser.save();
         res.status(201).json(document);
