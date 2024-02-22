@@ -150,6 +150,8 @@ const ManageProfile = () => {
         }
     }
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
