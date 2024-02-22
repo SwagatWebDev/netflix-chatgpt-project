@@ -141,7 +141,7 @@ const ManageProfile = () => {
         console.log(requestBody); // Check formData
 
         try {
-            const response = await axios.post(managedUserURL, requestBody, API_OPTION);
+            const response = await axios.post(managedUserURL, requestBody);
             handleSuccess(response);
             resetForm();
             console.log(response.data);
