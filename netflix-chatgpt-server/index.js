@@ -7,12 +7,11 @@ const productRoutes = require('./src/route/product-route');
 const netflixUserRoutes = require('./src/route/netflix-user-route');
 const cors = require('cors');
 
-// Enable CORS for all routes
-app.use(cors({
-    origin: 'https://netflix-chatgpt-ui.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'application/json']
-}));
+// Enable CORS middleware
+app.use(cors());
+
+// Allow preflight requests
+app.options('*', cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
