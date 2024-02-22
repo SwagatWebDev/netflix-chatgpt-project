@@ -13,7 +13,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+    origin: 'https://netflix-chatgpt-ui.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
+
 
 
 // Error handling middleware
