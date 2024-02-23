@@ -19,7 +19,7 @@ const appRouter = createBrowserRouter([
         element: <ManageProfile/>,
     },
     {
-        path: "/play-movie",
+        path: "/play-movie/:movieId",
         element: <PlayMovie/>,
     },
     {
