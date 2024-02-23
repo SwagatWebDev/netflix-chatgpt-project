@@ -24,14 +24,14 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(403)
-                .json({ message: "Auth failed username/password incorrect" });
+                .json({ message: "Auth failed username incorrect" });
         }
 
         //check pass
         const isPassMatch = await bcrypt.compare(password, user.password);
         if (!isPassMatch) {
             return res.status(403)
-                .json({ message: "Auth failed username/password incorrect" });
+                .json({ message: "Auth failed password incorrect" });
         }
         const userObject = {
             email,
