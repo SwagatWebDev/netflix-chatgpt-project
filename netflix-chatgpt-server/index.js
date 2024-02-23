@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 8080;
 const productRoutes = require('./src/route/product-route');
 const netflixUserRoutes = require('./src/route/netflix-user-route');
 const cors = require('cors');
+const userRouter = require("./src/route/user-route");
 
 // Enable CORS middleware
 app.use(cors());
@@ -34,7 +35,9 @@ app.use('/products', productRoutes);
 // /netflix-user
 app.use('/netflix-user', netflixUserRoutes);
 
+// user router middleware
+app.use('/user', userRouter);
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
     console.log('Server is listen in on PORT :' + PORT);
 })
