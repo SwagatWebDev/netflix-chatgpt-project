@@ -35,6 +35,7 @@ const loginUser = async (req, res) => {
         const userObject = {
             email,
             fullName: user.fullName,
+            photoURL: user.photoURL,
             _id: user._id
         }
         const jwtToken = jwt.sign(userObject,

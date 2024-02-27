@@ -1,54 +1,35 @@
-import React, {useEffect, useState} from 'react';
-import {HEADER_LOGO_URL, IMG_CDN_URL, SUPPORTED_LANGUAGES} from "../utils/constants";
-import {onAuthStateChanged, signOut} from "firebase/auth";
-import {auth} from "../utils/firebase";
-import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCog, faQuestionCircle, faSignInAlt, faUser} from "@fortawesome/free-solid-svg-icons";
-import {addUser, removeUser} from "../utils/userSlice";
-import {clearMovies, toggleGptSearchView} from "../utils/gptSlice";
-import {changeLanguage} from "../utils/configSlice";
+// Header.js
+import React, { useEffect, useState } from 'react';
+import {HEADER_LOGO_URL, SUPPORTED_LANGUAGES, USER_LOGO_URL} from "../utils/constants";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog, faQuestionCircle, faSignInAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import {removeUser} from "../utils/userSlice";
+import { clearMovies, toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/configSlice";
+import Cookies from 'js-cookie';
 
 export const Header = () => {
-
     const user = useSelector(store => store.user);
-
     const navigate = useNavigate();
-
     const [showDropdown, setShowDropDown] = useState(false);
-
     const dispatch = useDispatch();
-
     const showGptSearch = useSelector(store => store.gpt.showGptSearch);
+    const token = Cookies.get('token');
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const {uid, email, displayName, photoURL} = user;
-                dispatch(addUser({
-                    uid: uid,
-                    email: email,
-                    displayName: displayName,
-                    photoURL: photoURL
-                }));
-                navigate("/browse");
-            } else {
-                dispatch(removeUser());
-                navigate("/");
-            }
-        });
-        return () => unsubscribe();
+        if (!token) {
+            navigate("/"); // Redirect to login page if token doesn't exist
+        } else{
+            navigate("/browse");
+        }
     }, []);
 
     const handleSignOut = () => {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            navigate("/");
-        }).catch((error) => {
-            // An error happened.
-            // navigate("/error")
-        });
+        Cookies.remove('token'); // Clear token from cookies
+        dispatch(removeUser()); // Remove user from Redux store
+        navigate("/");
     }
 
     const handleDropdownClick = () => {
@@ -64,7 +45,7 @@ export const Header = () => {
     }
 
     const handleGptSearchClick = () => {
-        if(!showGptSearch){
+        if (!showGptSearch) {
             dispatch(clearMovies());
         }
         dispatch(toggleGptSearchView());
@@ -83,7 +64,7 @@ export const Header = () => {
                 alt="logo"
                 onClick={handleGptSearchClick}
             />
-            { user && <div className="flex p-2 justify-between">
+            {token && <div className="flex p-2 justify-between">
                 {showGptSearch && <select className="p-2 m-2 bg-gray-900 text-white rounded-lg"
                                           onChange={handleLanguageChange}>
                     {SUPPORTED_LANGUAGES.map((lang) => (
@@ -99,7 +80,7 @@ export const Header = () => {
                 <img
                     className="mx-2 w-12 h-12 rounded-lg cursor-pointer"
                     alt="userIcon"
-                    src={user ? user.photoURL : IMG_CDN_URL}
+                    src={user ? user.photoURL : USER_LOGO_URL}
                     onClick={handleDropdownClick}
                 />
                 <div
@@ -108,7 +89,7 @@ export const Header = () => {
                     onMouseLeave={handleDropdownLeave}
                 >
                     {showDropdown ? (
-                        <span className="cursor-pointer mt-2 text-white"  onMouseEnter={handleDropdownClick}>
+                        <span className="cursor-pointer mt-2 text-white" onMouseEnter={handleDropdownClick}>
                         &#9650;
                     </span>
                     ) : (
