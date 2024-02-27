@@ -6,7 +6,7 @@ const  VideoTitle = ({title, overview, movieId}) => {
     const navigate = useNavigate();
     return (
         <div className="w-screen aspect-video absolute md:px-24 px-6 pt-[15%] bg-gradient-to-r from-black text-white">
-            <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
+            <h1 className="text-2xl font-bold">{title}</h1>
             <p className="hidden md:inline-block py-6 text-lg w-1/3">{overview}</p>
             <div className="my-4 md:m-0">
                 <button className="bg-white text-black py-1 px-3 md:py-4 md:px-12 text-xl rounded-lg hover:bg-opacity-80"

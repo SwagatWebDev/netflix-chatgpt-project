@@ -27,7 +27,6 @@ const loginUser = async (req, res) => {
                 .json({ message: "Auth failed username incorrect" });
         }
 
-        //check pass
         const isPassMatch = await bcrypt.compare(password, user.password);
         if (!isPassMatch) {
             return res.status(403)
@@ -35,11 +34,11 @@ const loginUser = async (req, res) => {
         }
         const userObject = {
             email,
-            name: user.name,
+            fullName: user.fullName,
             _id: user._id
         }
         const jwtToken = jwt.sign(userObject,
-            process.env.JWT_SECRET, { expiresIn: '4h' });
+            process.env.JWT_SECRET, { expiresIn: '1h' });
 
         userObject.jwtToken = jwtToken;
         res.status(200)

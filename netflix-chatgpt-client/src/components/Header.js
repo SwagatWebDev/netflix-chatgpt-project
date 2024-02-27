@@ -76,7 +76,7 @@ export const Header = () => {
 
     return (
         <div
-            className="absolute w-screen md:px-8 md:py-2 md:mx-2 -my-[3.5%] md:my-6 -bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+            className="absolute w-screen md:px-8 md:mx-2 -my-[3.5%] md:my-6 -bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
             <img
                 className="w-44 mx-auto md:mx-0 cursor-pointer"
                 src={HEADER_LOGO_URL}
