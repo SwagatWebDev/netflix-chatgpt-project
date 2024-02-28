@@ -1,7 +1,8 @@
 import Select from "react-select";
 import React, {useRef, useState} from "react";
-import {API_OPTION, LOGIN_LOGO_URL} from "../utils/constants";
+import {API_OPTION, LOGIN_LOGO_URL, NETFLIX_GPT_API_OPTION} from "../utils/constants";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const ManageProfile = () => {
 
@@ -17,6 +18,12 @@ const ManageProfile = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const fileInputRef = useRef(null);
     const managedUserURL = 'https://netflix-chatgpt-api.vercel.app/netflix-user';
+    const NETFLIX_GPT_API_OPTION = {
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer ' + Cookies.get('token')
+        }
+    };
 
 
     const option1 = [
@@ -141,7 +148,8 @@ const ManageProfile = () => {
         console.log(requestBody); // Check formData
 
         try {
-            const response = await axios.post(managedUserURL, requestBody);
+            console.log(NETFLIX_GPT_API_OPTION);
+            const response = await axios.post(managedUserURL, requestBody, NETFLIX_GPT_API_OPTION);
             handleSuccess(response);
             resetForm();
             console.log(response.data);
