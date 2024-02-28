@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
         const userInfo = new User(req.body);
         userInfo.password = await bcrypt.hash(password, 10);
         await userInfo.save();
-        return res.status(201).json({message: 'success', response: userInfo});
+        return res.status(201).json({message: 'success', data: userInfo});
     } catch (err) {
         res.status(500).json({message: "Internal server error"});
     }

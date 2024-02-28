@@ -49,6 +49,8 @@ export const Login = () => {
         }
     };
 
+
+
     const handleSignIn = async () => {
         let validationMessage = checkValidLoginData(email.current.value, password.current.value, null);
         setErrorMessage(validationMessage);
