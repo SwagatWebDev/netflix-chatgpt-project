@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 const PlayMovie = () => {
     const { movieId } = useParams();
     useMovieTrailer(movieId);
+
     const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
     return (
         <div className="w-screen">
